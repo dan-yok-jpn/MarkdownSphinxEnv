@@ -80,6 +80,7 @@ release = '1.0'
 
 The `index.md` describe table of contents.
 Bellow sample shows in case consists 3 chapters.
+`chapter_[1-3].md` follows [MyST's core syntax](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html#) and [syntx extension](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html).
 
 ````md
 # Table of Contents
@@ -94,3 +95,35 @@ chapter_3.md
 * [Index](genindex)
 * [Search](search)
 ````
+
+### LaTex
+
+```md
+**Reynolds equations**
+
+$$
+\frac{\partial{u}_i}{\partial t}
+     + \frac{\partial\bigl({u}_i u_j\bigr)}{\partial x_j}
+    = X_i - \frac{1}{\rho}\frac{\partial{p}}{\partial x_i}
+     + \frac{\partial}{\partial x_j}\! \left(
+        \nu \frac{\partial{u}_i}{\partial x_j}
+      \right)
+$$
+
+Where, $t$ : time, $x_i$ : space, $u_i$ : velocity, 
+$X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.
+```
+
+**Reynolds equations**
+$$
+\frac{\partial{u}_i}{\partial t}
+     + \frac{\partial\bigl({u}_i u_j\bigr)}{\partial x_j}
+    = X_i - \frac{1}{\rho}\frac{\partial{p}}{\partial x_i}
+     + \frac{\partial}{\partial x_j}\! \left(
+        \nu \frac{\partial{u}_i}{\partial x_j}
+      \right)
+$$
+
+Where, $t$ : time, $x_i$ : space, $u_i$ : velocity, 
+$X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.
+

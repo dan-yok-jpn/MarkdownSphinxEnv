@@ -37,6 +37,7 @@ exit /b 0
     echo html_theme = "sphinx_rtd_theme"
     echo html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
     echo # html_show_sourcelink = False
+    echo myst_enable_extensions = ["dollarmath", "amsmath"]
     exit /b
 
 :index
