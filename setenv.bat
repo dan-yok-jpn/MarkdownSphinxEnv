@@ -12,8 +12,10 @@ if not exist %PYTHONHOME% (
     exit /b 0
 )
 
-%PYTHONHOME%\Scripts\pip install ^
-    -r requirements.txt -t .\Lib 1>nul 2>&1
+if not exist Lib (
+    %PYTHONHOME%\Scripts\pip install ^
+        -r requirements.txt -t .\Lib 1>nul 2>&1
+)
 
 set PYTHONPATH=%PYTHONPATH%;%~dp0Lib
 set BIN=%~dp0Lib\bin
