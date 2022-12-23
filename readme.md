@@ -68,13 +68,15 @@ make
 
 ###  PROJECT_HOME\souce\conf.py
 
-Edit the 9-12th lines according to your project.
+Edit the 9-13th lines according to your project.
 
 ```Python
 project = 'project name'
 copyright = '2022, author names'
 author = 'author names'
-release = '1.0'
+
+version = '1.0'
+release = '0'
 ```
 
 ###  PROJECT_HOME\souce\index.md
