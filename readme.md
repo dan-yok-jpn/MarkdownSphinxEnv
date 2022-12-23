@@ -115,11 +115,12 @@ $X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.
 ```
 
 **Reynolds equations**
+
 $$
 \frac{\partial{u}_i}{\partial t}
      + \frac{\partial\bigl({u}_i u_j\bigr)}{\partial x_j}
     = X_i - \frac{1}{\rho}\frac{\partial{p}}{\partial x_i}
-     + \frac{\partial}{\partial x_j}\! \left(
+     + \frac{\partial}{\partial x_j}\left(
         \nu \frac{\partial{u}_i}{\partial x_j}
       \right)
 $$
