@@ -1,10 +1,8 @@
 @echo off
 setlocal
 
-set PYTHONHOME=C:\Users\a2990\AppData\Local\Programs\Python\Python311
+set PYTHONHOME=C:\Python\Python311
 set PYTHONPATH=%PYTHONHOME%\Lib;%PYTHONHOME%\Lib\site-packages;
-
-goto :skip
 
 if not exist %PYTHONHOME% (
     echo.
@@ -17,7 +15,6 @@ if not exist %PYTHONHOME% (
 %PYTHONHOME%\Scripts\pip install ^
     -r requirements.txt -t .\Lib 1>nul 2>&1
 
-:skip
 set PYTHONPATH=%PYTHONPATH%;%~dp0Lib
 set BIN=%~dp0Lib\bin
 set PRJ=myProject
