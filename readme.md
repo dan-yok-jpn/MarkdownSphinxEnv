@@ -16,30 +16,33 @@ You can confirm this path with run `py -0p`.
 set PYTHONHOME=C:\Python\Python310
 ```
 
-## Make Environment
+## setenv.bat
 
-The command `set_env.bat` create bellow directories and files.
-Directory `.venv` is virtual environments to build Shinx Document.
-Name `myProject` is temporary, so reneme as you like.
+The command `setenv.bat` create new directory `Lib` and `myProject` as below.
+`Lib` is libraries to build Sphinx Document.
+`myProject` is temporary, so you can reneme as you like.
 
 ```cmd
-set_env.bat
+setenv
 ```
 
 ```cmd
 .
-|   .git
 |   .gitignore
 |   readme.md
 |   requirements.txt
-|   set_venv.bat
+|   setenv.bat
 |   sphinx.PNG
-|   start.bat
-+---.venv\
-|   |   pyvenv.cfg
-|   +---Include\
-|   +---Lib\
-|   \---Scripts\
++---.git\
++---Lib\
+|   +---bin\
+|   |       sphinx-quickstart.exe
+|   |       sphinx-build.exe
+|   |       the other modules
+|   +---sphinx\
+|   +---sphinx_rtd_theme\
+|   +---myst_parser\
+|   \---the other libralies\
 \---myProject\
     |   make.bat
     +---build\
@@ -51,16 +54,14 @@ set_env.bat
         \---_templates\
 ```
 
-To create another project, run `set_proj.bat project-name`.
-
 ## Make HTML Shinx Document
 
-If you type as bellow before edit files in `myProject\source\`,
-bellow Web contents are created at `myProject\build\html\`. 
+If you type as below before edit files in `myProject\source\`,
+Web contents shown below are created at `myProject\build\html\`. 
 
 ```cmd
 cd myProject
-make.bat
+make
 ```
 
 ![](sphinx.PNG)
@@ -79,7 +80,7 @@ release = '1.0'
 ###  PROJECT_HOME\souce\index.md
 
 The `index.md` describe table of contents.
-Bellow sample shows in case consists 3 chapters.
+Below sample shows in case consists 3 chapters.
 `chapter_[1-3].md` follows [MyST's core syntax](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html#) and [syntx extension](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html).
 
 ````md
