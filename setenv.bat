@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set PYTHONHOME=C:\Python\Python311
+set PYTHONHOME=C:\Users\dan_y\AppData\Local\Programs\Python\Python310
 set PYTHONPATH=%PYTHONHOME%\Lib;%PYTHONHOME%\Lib\site-packages;
 
 if not exist %PYTHONHOME% (
@@ -17,9 +17,14 @@ if not exist Lib (
         -r requirements.txt -t .\Lib 1>nul 2>&1
 )
 
+if "%1" == "" (
+    set PRJ=myProject
+) else (
+    set PRJ=%1
+)
+
 set PYTHONPATH=%PYTHONPATH%;%~dp0Lib
 set BIN=%~dp0Lib\bin
-set PRJ=myProject
 set SRC=%PRJ%\source
 
 %BIN%\sphinx-quickstart ^
@@ -37,14 +42,21 @@ set SRC=%PRJ%\source
 call :make    >  %PRJ%\make.bat
 call :append  >> %SRC%\conf.py
 call :index   >  %SRC%\index.md
-call :chapter >  %SRC%\renameMe.md
+mkdir %SRC%\img
+copy readme.md  %SRC%     1>nul 2>&1
+copy img        %SRC%\img 1>nul 2>&1
 
 exit /b 0
 
 :make
+    echo @echo off
     echo set PYTHONHOME=%PYTHONHOME%
     echo set PYTHONPATH=%PYTHONPATH%
-    echo %BIN%\sphinx-build -M html source build
+    echo if "%%1" == "" (
+    echo     %BIN%\sphinx-build -M html source build
+    echo ) else (
+    echo    %BIN%\sphinx-build -M %%1 source build
+    echo )
     exit /b
 
 :append
@@ -61,15 +73,8 @@ exit /b 0
 	echo ---
 	echo maxdepth: 2
 	echo ---
-	echo renameMe.md
+	echo readme.md
 	echo ```
 	echo * [Index](genindex)
 	echo * [Search](search)
     exit /b
-
-:chapter
-	echo # Chapter
-	echo ## Section
-    echo ### Subsection
-    exit /b
-

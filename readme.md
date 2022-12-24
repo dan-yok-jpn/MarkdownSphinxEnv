@@ -7,26 +7,26 @@ Set environment to create Sphinx Document using [MyST (Markedly Structured Text)
 * windows
 * python3
 
-## Preparement
+## Install
 
 Modify the 4th line of `setenv.bat` according your PC's setting.
 You can confirm this path with run `py -0p`.
 
-```cmd
+```bash
 set PYTHONHOME=C:\Python\Python310
 ```
 
-## setenv.bat
+Then run it.
 
-The command `setenv.bat` create new directory `Lib` and `myProject` as below.
-`Lib` is libraries to build Sphinx Document.
-`myProject` is temporary, so you can reneme as you like.
-
-```cmd
+```bash
 setenv
 ```
 
-```cmd
+This command create new directory `Lib` and `myProject` as below.
+`Lib` is libraries to build Sphinx Document.
+`myProject` is temporary, so you can reneme as you like.
+
+```bash
 .
 |   .gitignore
 |   readme.md
@@ -49,22 +49,29 @@ setenv
     \---source\
         |   conf.py
         |   index.md
-        |   renameMe.md
+        |   readme.md
+        +---_img\
         +---_static\
         \---_templates\
 ```
 
-## Make HTML Shinx Document
+When add another project, type like below.
+
+```bash
+setenv another
+```
+
+## Build Your Sphinx Document
 
 If you type as below before edit files in `myProject\source\`,
 Web contents shown below are created at `myProject\build\html\`. 
 
-```cmd
+```bash
 cd myProject
 make
 ```
 
-![](sphinx.PNG)
+![](img/sphinx.PNG)
 
 ###  PROJECT_HOME\souce\conf.py
 
@@ -79,9 +86,11 @@ version = '1.0'
 release = '0'
 ```
 
+You can set another option with editting this file. See [Configuration](https://myst-parser.readthedocs.io/en/latest/configuration.html) in detail. 
+
 ###  PROJECT_HOME\souce\index.md
 
-The `index.md` describe table of contents.
+The `index.md` describe portal page.
 Below sample shows in case consists 3 chapters.
 `chapter_[1-3].md` follows [MyST's core syntax](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html#) and [syntx extension](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html).
 
@@ -99,7 +108,9 @@ chapter_3.md
 * [Search](search)
 ````
 
-### LaTex
+### Math
+
+The current `conf.py` is added `dollarmath` extension. So, you can use `$...$` for inline math, and `$$...$$` for display math. 
 
 ```md
 **Reynolds equations**
