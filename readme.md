@@ -28,12 +28,12 @@ This command create new directory `Lib` and `myProject` as below.
 
 ```bash
 .
++---.git\
 |   .gitignore
 |   readme.md
 |   requirements.txt
 |   setenv.bat
-|   sphinx.PNG
-+---.git\
++---img\
 +---Lib\
 |   +---bin\
 |   |       sphinx-quickstart.exe
