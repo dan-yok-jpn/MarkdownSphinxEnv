@@ -1,7 +1,7 @@
 @echo off
 setlocal
 
-set PYTHONHOME=C:\Users\dan_y\AppData\Local\Programs\Python\Python310
+set PYTHONHOME=C:\Users\a2990\AppData\Local\Programs\Python\Python311
 set PYTHONPATH=%PYTHONHOME%\Lib;%PYTHONHOME%\Lib\site-packages;
 
 if not exist %PYTHONHOME% (
@@ -28,14 +28,14 @@ set BIN=%~dp0Lib\bin
 set SRC=%PRJ%\source
 
 %BIN%\sphinx-quickstart ^
-    --quiet --sep --ext-mathjax   ^
+    --quiet --sep ^
     --no-batchfile --no-makefile  ^
     --project      "project name" ^
     --author       "author names" ^
      -v            "1.0" ^
     --release      "0" ^
     --language     "jp" ^
-    --extensions   "myst_parser" ^
+    --extensions   "myst_parser,sphinx.ext.mathjax,sphinx.ext.napoleon" ^
     --suffix       ".md" ^
     %PRJ%
 
@@ -65,6 +65,9 @@ exit /b 0
     echo html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
     echo # html_show_sourcelink = False
     echo myst_enable_extensions = ["dollarmath", "amsmath"]
+    echo import os, sys
+    echo # path to source code
+    echo sys.path.insert(0, os.path.abspath('../'))
     exit /b
 
 :index

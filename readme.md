@@ -142,3 +142,40 @@ $$
 Where, $t$ : time, $x_i$ : space, $u_i$ : velocity, 
 $X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.
 
+
+## API Document
+
+Extension [napoleon](https://www.sphinx-doc.org/ja/master/usage/extensions/napoleon.html) includes in `conf.py`.
+So, if you describe `docstring` with Google or Numpy style into your source code (`myModule.py`), below markdown `api.md` builds easy readable API document.
+
+```Python
+# myModule.py
+def func(arg1, arg2):
+    """Summary line.
+
+    Extended description of function.
+
+    Args:
+        arg1 (int): Description of arg1
+        arg2 (str): Description of arg2
+
+    Returns:
+        bool: Description of return value
+
+    """
+    return True
+```
+
+````md
+<!-- api.md -->
+# API
+```{eval-rst}
+.. automodule:: myModule
+   :members:
+   :undoc-members:
+   :show-inheritance:
+```
+````
+
+![](img/api.PNG)
+
