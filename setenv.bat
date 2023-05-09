@@ -1,7 +1,10 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
 
-set PYTHONHOME=C:\Users\a2990\AppData\Local\Programs\Python\Python311
+for /f "usebackq tokens=2" %%i in (`py -0p 2^>nul`) do (
+    set V=%%~dpi
+    set PYTHONHOME=!V:~0,-1!
+)
 set PYTHONPATH=%PYTHONHOME%\Lib;%PYTHONHOME%\Lib\site-packages;
 
 if not exist %PYTHONHOME% (
@@ -35,7 +38,7 @@ set SRC=%PRJ%\source
      -v            "1.0" ^
     --release      "0" ^
     --language     "jp" ^
-    --extensions   "myst_parser,sphinx.ext.mathjax,sphinx.ext.napoleon" ^
+    --extensions   "myst_parser,sphinx.ext.mathjax,sphinx.ext.napoleon,sphinx_copybutton" ^
     --suffix       ".md" ^
     %PRJ%
 
