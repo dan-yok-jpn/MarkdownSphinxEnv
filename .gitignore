@@ -1,4 +1,5 @@
 */
 *.*
-!_images/sphinx.PNG
+!_images/
+!_images/*.*
 !setenv.bat
