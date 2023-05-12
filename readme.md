@@ -158,7 +158,7 @@ chapter_3.md
 * [MyST's core syntax](https://myst-parser.readthedocs.io/en/latest/syntax/syntax.html#)
 * [syntx extension](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html).
 
-### source/_images
+### source\\_images
 
 &nbsp;&nbsp; プロジェクト固有の画像ファイルは `source/_images` に登録し、次の行で表示させる。
 ちなみに、.md で先頭の `!` がない場合は通常のハイパーリンクとなる。

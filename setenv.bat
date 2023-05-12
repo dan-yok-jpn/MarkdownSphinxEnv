@@ -29,7 +29,7 @@ if "%1" == "" (
 )
 
 set PYTHONPATH=%PYTHONPATH%;%~dp0Lib
-set BIN=%~dp0Lib\bin
+set BIN=Lib\bin
 set SRC=%PRJ%\source
 
 %BIN%\sphinx-quickstart ^
@@ -57,8 +57,8 @@ goto :eof
 :make
     echo @echo off
     echo set PYTHONHOME=%PYTHONHOME%
-    echo set PYTHONPATH=%PYTHONPATH%
-    echo %BIN%\sphinx-build source build %%*
+    echo set PYTHONPATH=%%PYTHONHOME%%\Lib;%%PYTHONHOME%%\Lib\site-packages;..\Lib
+    echo ..\%BIN%\sphinx-build source build %%*
     exit /b
 
 :append
