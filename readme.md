@@ -44,7 +44,7 @@ build\index.html
 
 ![](_images/sphinx.PNG)
 
-&nbsp;&nbsp; この段階で、組み込まれている拡張機能は以下となっている（[sphinx](https://www.sphinx-doc.org/en/master/usage/extensions/index.html)、[MySt](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html) ）。必要があれば `setenv.bat` の 43 行目あるいは 69 行目を編集して既定の設定を変更することができる。
+&nbsp;&nbsp; この段階で、組み込まれている拡張機能は以下となっている（[sphinx](https://www.sphinx-doc.org/en/master/usage/extensions/index.html)、[MySt](https://myst-parser.readthedocs.io/en/latest/syntax/optional.html) ）。必要があれば `setenv.bat` の 43 行目あるいは 69 行目を編集して既定の設定を変更することができる。<br>
 &nbsp;&nbsp; また、sphinx のテーマとして `sphinx_rtd_theme` を採用している。
 
 * myst_parser
