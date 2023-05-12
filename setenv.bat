@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-if not defined %PYTHONHOME% (
+if not defined PYTHONHOME (
     if exist %SystemRoot%\py.exe (
         for /f "usebackq tokens=2" %%i in (`py -0p 2^>nul`) do (
             set V=%%~dpi
