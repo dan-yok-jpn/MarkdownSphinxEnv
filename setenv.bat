@@ -1,19 +1,21 @@
 @echo off
 setlocal enabledelayedexpansion
 
-for /f "usebackq tokens=2" %%i in (`py -0p 2^>nul`) do (
-    set V=%%~dpi
-    set PYTHONHOME=!V:~0,-1!
+if not defined %PYTHONHOME% (
+    if exist %SystemRoot%\py.exe (
+        for /f "usebackq tokens=2" %%i in (`py -0p 2^>nul`) do (
+            set V=%%~dpi
+            set PYTHONHOME=!V:~0,-1!
+        )
+    ) else (
+        echo.
+        echo    ERROR ^^!   PYTHONHOME is not defined.
+        echo    Check this Script
+        echo.
+        exit /b 0
+    )
 )
 set PYTHONPATH=%PYTHONHOME%\Lib;%PYTHONHOME%\Lib\site-packages;
-
-if not exist %PYTHONHOME% (
-    echo.
-    echo    ERROR !   %PYTHONHOME% not found.
-    echo    Check this Scripts
-    echo.
-    exit /b 0
-)
 
 if not exist Lib (
     %PYTHONHOME%\Scripts\pip install ^
@@ -21,7 +23,7 @@ if not exist Lib (
 )
 
 if "%1" == "" (
-    set PRJ=myProject
+    set PRJ=sample
 ) else (
     set PRJ=%1
 )
@@ -38,28 +40,25 @@ set SRC=%PRJ%\source
      -v            "1.0" ^
     --release      "0" ^
     --language     "jp" ^
-    --extensions   "myst_parser,sphinx.ext.mathjax,sphinx.ext.napoleon,sphinx_copybutton" ^
+    --extensions   "myst_parser,sphinx.ext.mathjax,sphinx.ext.autodoc,sphinx.ext.napoleon,sphinx_copybutton" ^
     --suffix       ".md" ^
     %PRJ%
 
 call :make    >  %PRJ%\make.bat
 call :append  >> %SRC%\conf.py
 call :index   >  %SRC%\index.md
-mkdir %SRC%\img
-copy readme.md  %SRC%     1>nul 2>&1
-copy img        %SRC%\img 1>nul 2>&1
-
-exit /b 0
+mkdir %SRC%\_images
+if "%PRJ%" == "sample" (
+    copy readme.md  %SRC%         1>nul 2>&1
+    copy _images    %SRC%\_images 1>nul 2>&1
+)
+goto :eof
 
 :make
     echo @echo off
     echo set PYTHONHOME=%PYTHONHOME%
     echo set PYTHONPATH=%PYTHONPATH%
-    echo if "%%1" == "" (
-    echo     %BIN%\sphinx-build -M html source build
-    echo ) else (
-    echo    %BIN%\sphinx-build -M %%1 source build
-    echo )
+    echo %BIN%\sphinx-build source build %%*
     exit /b
 
 :append
@@ -77,7 +76,7 @@ exit /b 0
 	echo # Table of Contents
 	echo ```{toctree}
 	echo ---
-	echo maxdepth: 2
+	echo maxdepth: 3
 	echo ---
 	echo readme.md
 	echo ```
