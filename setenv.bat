@@ -73,13 +73,13 @@ goto :eof
     exit /b
 
 :index
-	echo # Table of Contents
-	echo ```{toctree}
-	echo ---
-	echo maxdepth: 3
-	echo ---
-	echo readme.md
-	echo ```
-	echo * [Index](genindex)
-	echo * [Search](search)
+    echo # Table of Contents
+    echo ```{toctree}
+    echo ---
+    echo maxdepth: 3
+    echo ---
+    echo readme.md
+    echo ```
+    echo * [Index](genindex)
+    echo * [Search](search)
     exit /b
