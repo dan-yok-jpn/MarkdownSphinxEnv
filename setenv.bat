@@ -59,6 +59,11 @@ goto :eof
     echo set PYTHONHOME=%PYTHONHOME%
     echo set PYTHONPATH=%%PYTHONHOME%%\Lib;%%PYTHONHOME%%\Lib\site-packages;..\Lib
     echo ..\%BIN%\sphinx-build source build %%*
+    echo if exist build (
+    echo     if not exist build\css\custom.css (
+    echo         copy ..\custom.css build\_static\css 1^>nul 2^>nul
+    echo     )
+    echo )
     exit /b
 
 :append
@@ -70,6 +75,8 @@ goto :eof
     echo import os, sys
     echo # path to source code
     echo sys.path.insert(0, os.path.abspath('../'))
+    echo def setup(app):
+    echo     app.add_css_file('css/custom.css')
     exit /b
 
 :index
