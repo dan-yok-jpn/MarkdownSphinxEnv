@@ -49,8 +49,8 @@ call :append  >> %SRC%\conf.py
 call :index   >  %SRC%\index.md
 mkdir %SRC%\_images
 if "%PRJ%" == "sample" (
-    copy readme.md  %SRC%         1>nul 2>&1
-    copy _images    %SRC%\_images 1>nul 2>&1
+    copy sample.md  %SRC%\readme.md 1>nul 2>&1
+    copy _images    %SRC%\_images   1>nul 2>&1
 )
 goto :eof
 

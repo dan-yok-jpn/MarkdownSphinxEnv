@@ -35,7 +35,7 @@ make
 
 &nbsp;&nbsp; 上記が正常終了する場合は `build` ディレクトリ以下に .html 他が作成される。
 次のコマンドは既定の web ブラウザでこれを表示する。
-ここでは `readme.md` を sphinx ドキュメントに変換した下図のコンテンツが表示される。
+ここでは `sample.md` を sphinx ドキュメントに変換した下図のコンテンツが表示される。
 正常に表示されたならば `sample` 以下は消去しても良い。
 
 ```sh
@@ -80,15 +80,14 @@ $$
 \frac{\partial{u}_i}{\partial t}
      + \frac{\partial\bigl({u}_i u_j\bigr)}{\partial x_j}
     = X_i - \frac{1}{\rho}\frac{\partial{p}}{\partial x_i}
-     + \frac{\partial}{\partial x_j}\left(
+     + \frac{\partial}{\partial x_j}\! \left(
         \nu \frac{\partial{u}_i}{\partial x_j}
       \right)
-    \qquad\qquad\qquad (1) 
-$$
+$$ (eqn:Reynolds)
 
 Where, $t$ : time, $x_i$ : space, $u_i$ : velocity, 
 $X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.<br>
-Equation (1) calls **Reynolds equations**.
+Equation {eq}`eqn:Reynolds` calls **Reynolds equations**.
 
 ## 新規プロジェクト
 
@@ -99,7 +98,7 @@ setenv foo
 ```
 
 &nbsp;&nbsp; この段階で `foo` ディレクトリ以下は次の構成となる。
-ファイルは全て `sample` プロジェクト用の構成となっているため、`foo` プロジェクトに相応しい内容に編集し直す必要がある。
+ファイルは全て `readme.md` のファイルをコピーしたものとなっているため、`foo` プロジェクトに相応しい内容に編集し直す必要がある。
 
 ```
 foo
