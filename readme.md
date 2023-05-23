@@ -69,15 +69,14 @@ $$
      + \frac{\partial}{\partial x_j}\! \left(
         \nu \frac{\partial{u}_i}{\partial x_j}
       \right)
-$$
+$$ (eqn:Reynolds)
 
 Where, $t$ : time, $x_i$ : space, $u_i$ : velocity, 
-$X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.
+$X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.<br>
+Equation {eq}`eqn:Reynolds` calls **Reynolds equations**.
 ```
 
 &nbsp;&nbsp; このスクリプトは sphinx のみならず、他の markdown パーサでも以下のようにレンダリングされ、.tex のソースを殆ど変更することなく流用できる。
-
-**Reynolds equations**
 
 $$
 \frac{\partial{u}_i}{\partial t}
@@ -89,7 +88,8 @@ $$
 $$
 
 Where, $t$ : time, $x_i$ : space, $u_i$ : velocity, 
-$X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.
+$X_i$ : external force, $\rho$ : density, $\nu$ : kinematic viscosity.<br>
+Equation {eq}`eqn:Reynolds` calls **Reynolds equations**.
 
 ## 新規プロジェクト
 
