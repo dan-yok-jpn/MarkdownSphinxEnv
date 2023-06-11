@@ -3,5 +3,6 @@
 !_images/
 !_images/*.*
 !setenv.bat
+!setenv_apidoc.bat
 !custom.css
 !sample.md

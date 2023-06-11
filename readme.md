@@ -173,3 +173,34 @@ chapter_3.md
     <img src="_images/bar.png" width="80%">
 </div><br>
 ```
+
+## API ドキュメント
+
+### 環境設定
+
+&nbsp;&nbsp; 次のコマンドを実行するとプロジェクト・フォルダ（引数を省略した場合は `sample_api`）が作成され、
+直下に上述の構成の他に加えて `make_apidoc.bat` と　`programs` フォルダが作成される。
+
+```sh
+setenv_apidoc.bat [プロジェクト名]
+```
+
+### ドキュメントの作成
+
+#### モジュールの登録
+
+&nbsp;&nbsp; `programs` にソースコードを保存したうえで（`sample_api` には `sample.py` が保存済）、
+次のコマンドを入力して、`modules.rst` 他を `source` フォルダに作成する。
+
+```
+make_apidoc.bat
+```
+
+#### ドキュメントの生成
+
+&nbsp;&nbsp; 必要に応じて `source\index.rst` を編集した後、
+次のコマンドを実行して web コンテンツを作成する。
+
+```sh
+make.bat
+```

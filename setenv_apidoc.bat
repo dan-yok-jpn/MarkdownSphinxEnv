@@ -18,12 +18,15 @@ if not defined PYTHONHOME (
 set PYTHONPATH=%PYTHONHOME%\Lib;%PYTHONHOME%\Lib\site-packages;
 
 if not exist Lib (
-    %PYTHONHOME%\Scripts\pip install ^
-        -r requirements.txt -t .\Lib 1>nul 2>&1
+    echo.
+    echo    ERROR ^^!   Library not exists.
+    echo    Run `./setenv.bat' first.
+    echo.
+    exit /b 0
 )
 
 if "%1" == "" (
-    set PRJ=sample
+    set PRJ=sample_api
 ) else (
     set PRJ=%1
 )
@@ -31,6 +34,9 @@ if "%1" == "" (
 set PYTHONPATH=%PYTHONPATH%;%~dp0Lib
 set BIN=Lib\bin
 set SRC=%PRJ%\source
+set PRG=%PRJ%\programs
+
+if not exist %PRG% (mkdir %PRG%)
 
 %BIN%\sphinx-quickstart ^
     --quiet --sep ^
@@ -41,29 +47,36 @@ set SRC=%PRJ%\source
     --release      "0" ^
     --language     "jp" ^
     --extensions   "myst_parser,sphinx.ext.mathjax,sphinx.ext.autodoc,sphinx.ext.napoleon,sphinx_copybutton" ^
-    --suffix       ".md" ^
     %PRJ%
 
-call :make    >  %PRJ%\make.bat
-call :append  >> %SRC%\conf.py
-call :index   >  %SRC%\index.md
+call :make   >  %PRJ%\make.bat
+call :make2  >  %PRJ%\make_apidoc.bat
+call :append >> %SRC%\conf.py
+call :index  >  %SRC%\index.rst
+
 mkdir %SRC%\_images
-if "%PRJ%" == "sample" (
-    copy _images\sample.md   %SRC%\readme.md 1>nul 2>&1
-    copy _images\sphinx.PNG  %SRC%\_images   1>nul 2>&1
+if "%PRJ%" == "sample_api" (
+    copy _images\sample.py  %PRG% 1>nul 2>&1
 )
 goto :eof
 
 :make
     echo @echo off
     echo set PYTHONHOME=%PYTHONHOME%
-    echo set PYTHONPATH=%%PYTHONHOME%%\Lib;%%PYTHONHOME%%\Lib\site-packages;..\Lib
+    echo set PYTHONPATH=%%PYTHONHOME%%\Lib;%%PYTHONHOME%%\Lib\site-packages;..\Lib;programs
     echo ..\%BIN%\sphinx-build source build %%*
     echo if exist build (
     echo     if not exist build\css\custom.css (
     echo         copy ..\custom.css build\_static\css 1^>nul 2^>nul
     echo     )
     echo )
+    exit /b
+
+:make2
+    echo @echo off
+    echo set PYTHONHOME=%PYTHONHOME%
+    echo set PYTHONPATH=%%PYTHONHOME%%\Lib;%%PYTHONHOME%%\Lib\site-packages;..\Lib
+    echo ..\%BIN%\sphinx-apidoc programs -o source
     exit /b
 
 :append
@@ -80,13 +93,20 @@ goto :eof
     exit /b
 
 :index
-    echo # Table of Contents
-    echo ```{toctree}
-    echo ---
-    echo maxdepth: 3
-    echo ---
-    echo readme.md
-    echo ```
-    echo * [Index](genindex)
-    echo * [Search](search)
+	echo Welcome to project name's documentation!
+	echo ========================================
+	echo.
+	echo .. toctree::
+	echo    :maxdepth: 2
+	echo    :caption: Contents
+	echo. 
+	echo    modules
+	echo.
+	echo.
+	echo Indices and tables
+	echo ==================
+	echo.
+	echo * :ref:`genindex`
+	echo * :ref:`modindex`
+	echo * :ref:`search`
     exit /b
