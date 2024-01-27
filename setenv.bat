@@ -1,92 +1,30 @@
 @echo off
-setlocal enabledelayedexpansion
+setlocal
 
-if not defined PYTHONHOME (
-    if exist %SystemRoot%\py.exe (
-        for /f "usebackq tokens=2" %%i in (`py -0p 2^>nul`) do (
-            set V=%%~dpi
-            set PYTHONHOME=!V:~0,-1!
-        )
-    ) else (
-        echo.
-        echo    ERROR ^^!   PYTHONHOME is not defined.
-        echo    Check this Script
-        echo.
-        exit /b 0
+if exist %SystemRoot%\py.exe (
+    for /f "usebackq tokens=3" %%i in (`py -0p 2^>nul`) do (
+        set PYTHONHOME=%%~dpi
+        goto :BRK
     )
-)
-set PYTHONPATH=%PYTHONHOME%\Lib;%PYTHONHOME%\Lib\site-packages;
-
-if not exist Lib (
-    %PYTHONHOME%\Scripts\pip install ^
-        -r requirements.txt -t .\Lib 1>nul 2>&1
-)
-
-if "%1" == "" (
-    set PRJ=sample
 ) else (
-    set PRJ=%1
+    echo This script use py.exe installing with the installer of python.org.
+    goto :eof
 )
 
-set PYTHONPATH=%PYTHONPATH%;%~dp0Lib
-set BIN=Lib\bin
-set SRC=%PRJ%\source
-
-%BIN%\sphinx-quickstart ^
-    --quiet --sep ^
-    --no-batchfile --no-makefile  ^
-    --project      "project name" ^
-    --author       "author names" ^
-     -v            "1.0" ^
-    --release      "0" ^
-    --language     "jp" ^
-    --extensions   "myst_parser,sphinx.ext.mathjax,sphinx.ext.autodoc,sphinx.ext.napoleon,sphinx_copybutton" ^
-    --suffix       ".md" ^
-    %PRJ%
-
-call :make    >  %PRJ%\make.bat
-call :append  >> %SRC%\conf.py
-call :index   >  %SRC%\index.md
-mkdir %SRC%\_images
-if "%PRJ%" == "sample" (
-    copy _images\sample.md   %SRC%\readme.md 1>nul 2>&1
-    copy _images\sphinx.PNG  %SRC%\_images   1>nul 2>&1
+:BRK
+if exist Lib (
+    PowerShell -Command .\has_new_ver
+    if if %ERRORLEVEL% equ 1 (
+        set OPT=-U
+        echo Updating Lib
+    ) else (
+        echo No need to update Lib
+        goto :eof
+    )
+) else (
+    echo Creating Lib
 )
-goto :eof
 
-:make
-    echo @echo off
-    echo set PYTHONHOME=%PYTHONHOME%
-    echo set PYTHONPATH=%%PYTHONHOME%%\Lib;%%PYTHONHOME%%\Lib\site-packages;..\Lib
-    echo ..\%BIN%\sphinx-build source build %%*
-    echo if exist build (
-    echo     if not exist build\css\custom.css (
-    echo         copy ..\custom.css build\_static\css 1^>nul 2^>nul
-    echo     )
-    echo )
-    exit /b
+%PYTHONHOME%\Scripts\pip %OPT% ^
+    -r requirements.txt -t .\Lib install 1>nul 2>&1
 
-:append
-    echo import sphinx_rtd_theme
-    echo html_theme = "sphinx_rtd_theme"
-    echo html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-    echo # html_show_sourcelink = False
-    echo myst_enable_extensions = ["dollarmath", "amsmath"]
-    echo import os, sys
-    echo # path to source code
-    echo sys.path.insert(0, os.path.abspath('../'))
-    echo def setup(app):
-    echo     app.add_css_file('css/custom.css')
-    exit /b
-
-:index
-    echo # Table of Contents
-    echo ```{toctree}
-    echo ---
-    echo maxdepth: 3
-    echo ---
-    echo readme.md
-    echo ```
-    echo * [Index](genindex)
-    echo * [Search](search)
-    exit /b

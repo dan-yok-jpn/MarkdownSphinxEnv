@@ -1,8 +1,12 @@
 */
 *.*
-!_images/
-!_images/*.*
-!setenv.bat
-!setenv_apidoc.bat
+!.gitignore
+!cheatsheet.md
 !custom.css
-!sample.md
+!has_new_ver.ps1
+!make_all.bat
+!mkProj.bat
+!readme.md
+!requirements.txt
+!setenv.bat
+!toc.ps1
