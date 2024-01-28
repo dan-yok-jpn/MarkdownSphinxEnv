@@ -28,3 +28,6 @@ if exist Lib (
 %PYTHONHOME%\Scripts\pip %OPT% ^
     -r requirements.txt -t .\Lib install 1>nul 2>&1
 
+set /p RES="Do you rebuild dpcuments of all projects ? (y/n)"
+if not "%RES%" == "y" (goto :eof)
+make_all

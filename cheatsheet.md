@@ -165,10 +165,10 @@ $$
 と表示される。あるいは amsmath の[数式環境](https://qiita.com/t_kemmochi/items/a4c390b4967b13f3afb7)
 
 ```
-\begin{align}
+\begin{align*}
 y &= a x + b \\
 z &= c x + d
-\end{align}
+\end{align*}
 ```
 
 を用いて以下のような出力を得ることができる。
