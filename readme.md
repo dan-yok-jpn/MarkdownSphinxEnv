@@ -17,7 +17,9 @@ Github、Qiita、StackOverflow など人気の高い web サイトの既定の�
 <div style="margin-left: 2em">
 <dl>
 <dt><a href="#setenvbat">setenv.bat</a></dt>
-<dd>ライブラリのインストール、アップデート</dd>
+<dd>Sphinx ドキュメントを作成するための仮想環境の作成</dd>
+<dt><a href="#updatebat">update_env.bat</a></dt>
+<dd>仮想環境の再構築・ライブラリの更新</dd>
 <dt><a href="#mkprojbat">mkProj.bat</a></dt>
 <dd>プロジェクトのファイル・ツリーの初期設定</dd>
 <dt><a href="#make_htdocsbat">make_htdocs.bat</a></dt>
@@ -45,20 +47,28 @@ sed は複数のプロジェクトの総目次を作成する場合に使用す�
 setenv
 ```
 
-&emsp;初回の実行時は `Lib` ディレクトリが作成され、
+&emsp;初回の実行時は `.venv` ディレクトリが作成され、
 `resurements.txt` に記述されているサイトパッケージがインストールされる。
-再度の実行時は `shpinx` パッケージおよび `myst_parser` パッケージの更新状況を確認して、
-先の何れかがアップデートしている場合にサイトパッケージの再インストールを行う。
-また、必要に応じて Sphinx ドキュメントの再生成を行う。<br>
-&emsp;Python 自体の更新を行った場合は Lib の実行可能ファイルとの互換性が損なわれるので、
-一旦 Lib ディレクトリを消去して、setenv を実行し直す必要がある。
+また `.vscode` ディレクトリに仮想環境用の設定を加える。
+
+## update_env.bat
+
+**Usage**
+
+```
+update_env
+```
+
+&emsp;Python がバージョンアップした場合に仮想環境の再構築を行う。
+&emsp;また、必要に応じて `shpinx` パッケージおよび `myst_parser` パッケージ等の更新を行う。
+さらに、ユーザーが求める場合に Sphinx ドキュメントの再生成を行う。<br>
 
 ## mkProj.bat
 
 **Usage**
 
 <pre>
-mkProj [<i>project-name</i>] [-t]
+mkProj (<i>project-name</i> | -t | -h)
 </pre>
 
 &emsp;*`project-name`* をトップディレクトリとするプロジェクトを作成し、

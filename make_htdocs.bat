@@ -23,7 +23,8 @@ if exist htdocs (
 ) 
 
 for /d %%d in (*) do (
-    if not "%%d" == "Lib" (
+    set name=%%d
+    if not "!name:~0,1!" == "." ( 
         if not "%%d" == "htdocs" (
             call :get_time %%d\build
             if "!tm!" gtr "%tm0%" ( set PRJS=!PRJS! %%~nd ) 

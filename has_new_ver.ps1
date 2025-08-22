@@ -16,7 +16,7 @@ function get_cur_version ($pac) {
     $regex = $pac + ".*.dist-info"
 
     $names = (
-        Get-ChildItem -Path .\Lib -Attributes D |
+        Get-ChildItem -Path .\.venv\Lib\site-packages -Attributes D |
         Where-Object {$_.Name -Match $regex}
     )
     $name = ($names[$names.Length - 1] | Out-String)

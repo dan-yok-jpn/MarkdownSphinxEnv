@@ -1,34 +1,23 @@
 @echo off
 setlocal
 
-if exist %SystemRoot%\py.exe (
-    for /f "usebackq tokens=3" %%i in (`py -0p 2^>nul`) do (
-        set PYTHONHOME=%%~dpi
-        goto :BRK
-    )
-) else (
-    echo This script use py.exe installing with the installer of python.org.
-    goto :eof
-)
-:BRK
-if        "%1" == "" ( goto :help 
-) else if "%1" == "-h" ( goto :help )
+if "%1" == ""   ( goto :help )
+if "%1" == "-h" ( goto :help )
 
 if exist %1 (
     echo Project "%1" exists alreadey.
     goto :eof
 ) else if     "%1" == "-t"  ( set PRJ=TOC
-) else if not "%1" == "TOC" ( set PRJ=TOC
+) else if not "%1" == "TOC" ( set PRJ=%1
 ) else (
     echo "TOC" is reserved. Please change the name.
     goto :eof 
 )
 mkdir %PRJ%
 
-set PYTHONPATH=%PYTHONHOME%Lib;%PYTHONHOME%Lib\site-packages;.\Lib
 set SRC=%PRJ%\source
 
-.\Lib\bin\sphinx-quickstart ^
+sphinx-quickstart ^
     --quiet --sep ^
     --no-batchfile --no-makefile  ^
     --project      "%PRJ%" ^
@@ -51,13 +40,7 @@ goto :eof
 :make
     echo @echo off
     echo setlocal
-    echo for /f "usebackq tokens=3" %%%%i in (`py -0p 2^^^>nul`) do (
-    echo     set PYTHONHOME=%%%%~dpi
-    echo     goto :BRK
-    echo )
-    echo :BRK
-    echo set PYTHONPATH=%%PYTHONHOME%%Lib;%%PYTHONHOME%%Lib\site-packages;..\Lib
-    echo ..\Lib\bin\sphinx-build -b html source build %%*
+    echo sphinx-build -b html source build %%*
     echo if exist build (
     echo     if not exist build\css\custom.css (
     echo         copy ..\custom.css build\_static\css 1^>nul 2^>nul

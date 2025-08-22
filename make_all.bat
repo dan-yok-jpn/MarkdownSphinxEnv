@@ -5,7 +5,8 @@ set HOME=%~dp0
 set HOME=%HOME:~,-1%
 set DIRS=
 for /d %%d in (*) do (
-    if not "%%d" == "Lib" (
+    set name=%%d
+    if not "!name:~0,1!" == "." ( 
         if not "%%d" == "htdoc" (
             set DIRS=!DIRS! %%d
         )

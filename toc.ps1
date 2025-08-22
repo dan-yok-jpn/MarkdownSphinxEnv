@@ -3,8 +3,8 @@
 $fmt = '* <a href="../../{0}/build/index.html">{1}</a>'
 $lines = @('# Table of contents', '')
 Get-ChildItem -Path . -Attributes D |
-Where-Object {$_.Name -ne "Lib" -and $_.Name -ne "htdoc" `
-         -and $_.Name -ne "TOC"} |
+Where-Object {$_.Name -ne "TOC" -and $_.Name -ne "htdoc" `
+         -and (-not ($_.Name.StartsWith(".")))} |
 ForEach-Object {
     $proj = $_.Name
     $conf = $proj + "\source\conf.py"
