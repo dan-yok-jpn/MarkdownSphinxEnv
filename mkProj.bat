@@ -54,9 +54,9 @@ goto :eof
     echo html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
     echo # html_show_sourcelink = False
     echo myst_enable_extensions = ["dollarmath", "amsmath"]
-    echo import os, sys
+    echo # import os, sys
     echo # path to source code
-    echo sys.path.insert(0, os.path.abspath('../'))
+    echo # sys.path.insert(0, os.path.abspath('../'))
     echo def setup(app):
     echo     app.add_css_file('css/custom.css')
     exit /b
